@@ -32,12 +32,10 @@ jobs:
       - name: Build website
         run: pnpm run build
 
-      - name: Deploy to Cloudflare Pages
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist --project-name=vue-web3-template
-          packageManager: pnpm
-          # 可选：启用此项以触发 GitHub Deployments
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+      - name: Install and use Wrangler with pnpm
+        run: |
+          pnpm add -D wrangler
+          pnpm exec wrangler pages deploy dist --project-name=vue-web3-template
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
