@@ -38,5 +38,6 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy dist --project-name=vue-web3-template
+          packageManager: pnpm
           # 可选：启用此项以触发 GitHub Deployments
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
